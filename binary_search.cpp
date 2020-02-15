@@ -2,8 +2,8 @@
 #include <vector>
 
 template <typename Comparable>
-Comparable binary_search(std::vector<Comparable> v, Comparable k) {
-  Comparable min = 0, max = v.size() - 1, mid;
+int binary_search(std::vector<Comparable> v, Comparable k) {
+  int min = 0, max = v.size() - 1, mid;
   while(v[min] <= v[max]) {
     mid = (max + min) / 2;
     if(k == v[mid]) 
