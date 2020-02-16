@@ -17,7 +17,7 @@ int binary_search(std::vector<Comparable> v, Comparable k) {
 }
 
 int main() {
-  std::vector<int> v{200, 0, 9, 10, 500, 300};
+  std::vector<int> v{0,1,3,9,10,100};
   std::cout << binary_search(v, 9) << std::endl;
   return 0;
 }
