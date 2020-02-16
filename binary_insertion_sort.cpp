@@ -19,8 +19,8 @@ void binary_insertion_sort(std::vector<Comparable> v) {
   for(int i = 0; i < v.size(); i++) {
     Comparable tmp = std::move(v[i + 1]);
     int l = binary_search(v, tmp, i, 0);
-    for(int j = i + 1; j > 0; --j) {
-      v[j] = std::move(v[j - 1]);
+    for(int j = i; j >= l; --j) {
+      v[j + 1] = std::move(v[j]);
     }
     v[l] = std::move(tmp);
   }
@@ -30,7 +30,5 @@ int main() {
   std::vector<int> v{200, 0, 9, 10, 500, 300};
   binary_insertion_sort(v);
   for(int i : v) std::cout << i << " ";
-  //std::vector<int> v1{1,200};
-  //std::cout << binary_search(v1,9) << std::endl;
   return 0;
 }
