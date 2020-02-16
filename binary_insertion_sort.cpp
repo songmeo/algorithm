@@ -16,11 +16,13 @@ int binary_search(std::vector<Comparable> v, Comparable k, int max, int min) {
 
 template <typename Comparable>
 std::vector<Comparable> binary_insertion_sort(std::vector<Comparable> v) {
-  for(int i = 0; i < v.size(); ++i) {
-    Comparable tmp = std::move(v[i + 1]);
-    int l = binary_search(v, tmp, i, 0);
-    for(int j = i; j >= l; --j) {
+  for(int i = 1; i < v.size(); ++i) {
+    int  j = i - 1;
+    Comparable tmp = std::move(v[i]);
+    int l = binary_search(v, tmp, j, 0);
+    while(j >= l) {
       v[j + 1] = std::move(v[j]);
+      --j;
     }
     v[l] = std::move(tmp);
   }
@@ -28,7 +30,7 @@ std::vector<Comparable> binary_insertion_sort(std::vector<Comparable> v) {
 }
 
 int main() {
-  std::vector<int> v{200, 0, 9, 10, 500, 300};
+  std::vector<int> v{0,10,100,5,3,1};
   for(int i : binary_insertion_sort(v)) std::cout << i << " ";
   return 0;
 }
