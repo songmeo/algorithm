@@ -3,7 +3,7 @@
 
 template <typename Comparable>
 int binary_search(std::vector<Comparable> v, Comparable k, int max, int min) {
-    if(max == min) 
+    if(max <= min) 
       return (k > v[min])?(min + 1):min;
     int mid = (max + min) / 2;
     if(k == v[mid])
@@ -30,7 +30,7 @@ std::vector<Comparable> binary_insertion_sort(std::vector<Comparable> v) {
 }
 
 int main() {
-  std::vector<int> v{0,10,100,5,3,1};
-  for(int i : binary_insertion_sort(v)) std::cout << i << " ";
+  std::vector<double> v{4., 3., 2.};
+  for(double i : binary_insertion_sort(v)) std::cout << i << " ";
   return 0;
 }
