@@ -17,13 +17,10 @@ int binary_search(std::vector<Comparable> v, Comparable k, int max, int min) {
 template <typename Comparable>
 std::vector<Comparable> binary_insertion_sort(std::vector<Comparable> v) {
   for(int i = 1; i < v.size(); ++i) {
-    int  j = i - 1;
     Comparable tmp = std::move(v[i]);
-    int l = binary_search(v, tmp, j, 0);
-    while(j >= l) {
-      v[j + 1] = std::move(v[j]);
-      --j;
-    }
+    int l = binary_search(v, v[i], i-1, 0);
+    for(int j = i; j > l; --j) 
+      v[j] = std::move(v[j - 1]);
     v[l] = std::move(tmp);
   }
   return v;
