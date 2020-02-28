@@ -20,6 +20,6 @@ TreeNode* insert(int arr[], TreeNode* root, int i, int n) {
 
 int main() {
 	int arr[] = {1,2,2,3,4,4,3};
-	TreeNode* root = insert(arr, root, 0, sizeof(int));
+	TreeNode* root = insert(arr, root, 0, sizeof(arr)/sizeof(arr[0]));
 	return 0;
 }
