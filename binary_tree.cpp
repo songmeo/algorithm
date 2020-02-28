@@ -18,8 +18,17 @@ TreeNode* insert(int arr[], TreeNode* root, int i, int n) {
   return root;
 }
 
+void printNode(TreeNode* root) {
+  if(root != NULL) {
+    printNode(root->left);
+    cout << root->val << " ";
+    printNode(root->right);
+  }
+}
+
 int main() {
 	int arr[] = {1,2,2,3,4,4,3};
 	TreeNode* root = insert(arr, root, 0, sizeof(arr)/sizeof(arr[0]));
+	printNode(root);
 	return 0;
 }
