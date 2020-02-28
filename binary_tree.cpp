@@ -18,11 +18,11 @@ TreeNode* insert(int arr[], TreeNode* root, int i, int n) {
   return root;
 }
 
-void printNode(TreeNode* root) {
+void printInOrder(TreeNode* root) {
   if(root != NULL) {
-    printNode(root->left);
+    printInOrder(root->left);
     cout << root->val << " ";
-    printNode(root->right);
+    printInOrder(root->right);
   }
 }
 
