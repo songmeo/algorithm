@@ -29,6 +29,6 @@ void printInOrder(TreeNode* root) {
 int main() {
 	int arr[] = {1,2,2,3,4,4,3};
 	TreeNode* root = insert(arr, root, 0, sizeof(arr)/sizeof(arr[0]));
-	printNode(root);
+	printInOrder(root);
 	return 0;
 }
