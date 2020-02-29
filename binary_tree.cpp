@@ -18,6 +18,7 @@ TreeNode* insert(int arr[], TreeNode* root, int i, int n) {
   return root;
 }
 
+//left right root
 void printInOrder(TreeNode* root) {
   if(root != NULL) {
     printInOrder(root->left);
@@ -26,9 +27,34 @@ void printInOrder(TreeNode* root) {
   }
 }
 
+//root left right
+void printPreOrder(TreeNode* root) {
+	if(root) {
+		cout << root->val << " ";
+		printPreOrder(root->left);
+		printPreOrder(root->right);
+	}
+}
+
+//left right root
+void printPostOrder(TreeNode* root) {
+	if(root) {
+		printPostOrder(root->left);
+		printPostOrder(root->right);
+		cout << root->val << " ";
+	}
+}
+
 int main() {
 	int arr[] = {1,2,2,3,4,4,3};
 	TreeNode* root = insert(arr, root, 0, sizeof(arr)/sizeof(arr[0]));
+	cout << "InOrder: ";
 	printInOrder(root);
+	cout << endl;
+	cout << "PreOrder: ";
+	printPreOrder(root);
+	cout << endl;
+	cout << "PostOrder: ";
+	printPostOrder(root);
 	return 0;
 }
