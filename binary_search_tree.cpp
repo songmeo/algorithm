@@ -18,41 +18,70 @@ public:
 	bst();
 	~bst();
 	void insert(int i);
-	void remove(TreeNode* n);
-	void printPreOrder();
+	TreeNode* search(int i);
+	void destroy();
+	void preorder_print();
 private:
-	void insert(int i, TreeNode* root);
+	void insert(int i, TreeNode* &root);
+	void preorder_print(TreeNode* n);
+	void destroy(TreeNode* n);
+	TreeNode* root;
+};
+
+bst::bst() {
+	root = NULL;
+}
+
+bst::~bst() {
+	destroy();
 }
 
 void bst::insert(int i) {
-
+	insert(i, root);
 }
 
-void bst::insert(TreeNode* &root, TreeNode* tmp) {
-	if(!root) root = tmp;
-	else if(root->val < tmp->val)
-		insert(root->left,tmp);
-	else
-		insert(root->right,tmp);
+void bst::insert(int i, TreeNode* &node) {
+	TreeNode* tmp = new TreeNode(i);
+	if(!node)
+		node = tmp;
+	else if(node->val < tmp->val)
+		insert(i,node->left);
+	else if(node->val > tmp->val)
+		insert(i,node->right);
 }
 
-void printPreOrder(TreeNode* root) {
-	TreeNode* tmp = root;
+void bst::preorder_print() {
+	preorder_print(root);
+}
+
+void bst::preorder_print(TreeNode* node) {
+	TreeNode* tmp = node;
 	if(tmp) {
-		cout << root->val << " ";
-		printPreOrder(root->left);
-		printPreOrder(root->right);
+		cout << node->val << " ";
+		preorder_print(node->left);
+		preorder_print(node->right);
 	}
 }
+
+void bst::destroy() {
+	destroy(root);
+}
+
+void bst::destroy(TreeNode* node) {
+	if(node) {
+		destroy(node->left);
+		destroy(node->right);
+		delete node;
+	}
+}
+
+
 
 int main() {
 	int arr[] = {11,6,8,19,4,10,5,17,43,49,31};
-	TreeNode* root = 0;
-	for(int i : arr) {
-		TreeNode* tmp = new TreeNode(i);
-		insert(root, tmp);
-	}
-	printPreOrder(root);
+	bst* t = new bst();
+	for(int i : arr) t->insert(i);
+	t->preorder_print();
 	return 0;
 }
 
