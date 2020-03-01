@@ -44,9 +44,9 @@ void bst::insert(int i, TreeNode* &node) {
 	TreeNode* tmp = new TreeNode(i);
 	if(!node)
 		node = tmp;
-	else if(node->val < tmp->val)
+	else if(tmp->val < node->val)
 		insert(i,node->left);
-	else if(node->val > tmp->val)
+	else if(tmp->val > node->val)
 		insert(i,node->right);
 }
 
@@ -75,13 +75,12 @@ void bst::destroy(TreeNode* node) {
 	}
 }
 
-
-
 int main() {
-	int arr[] = {11,6,8,19,4,10,5,17,43,49,31};
+	int arr[] = {10,6,14,5,8,11,18};
 	bst* t = new bst();
 	for(int i : arr) t->insert(i);
 	t->preorder_print();
+	t->destroy();
 	return 0;
 }
 
