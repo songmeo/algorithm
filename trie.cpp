@@ -3,40 +3,39 @@
 #include <algorithm>
 using namespace std;
 
-class Node {
-private:
+struct Node {
 	map<char, Node*> children;
 	bool completeWord;
-public:
-	Node(bool c);
-	void insert(Node* root, string s);
 };
 
-Node::Node(bool c) {
-	completeWord = c;
+class Trie {
+private:
+	Node* root;
+public:
+	Trie();
+	void insert(string s);
+};
+
+Trie::Trie() {
 }
 
-void Node::insert(Node* root, string s) {
+void Trie::insert(string s) {
+	Node* p = root;
 	for(auto it = s.begin(); it != s.end(); ++it) {
-		if(!root->children.count(*it)) {
-			Node* n;
-			if(it != s.end() - 1) {
-				n = new Node(false);
-			}
-			else {
-				n = new Node(true);
-			}
+		if(!p->children.count(*it)) {
+			Node* n = new Node();
 			root->children.insert(pair<char, Node*>(*it,n));
 		}
 		else {
-			root = (root->children)[*it];
+			p = p->children[*it];
 		}
 	}
 }
 
 int main() {
-	Node* root = new Node(false);
-	(*root).insert(root, string("abc"));
+	Trie* t = new Trie();
+	t->insert("abc");
+	//t->insert("adf");
 	return 0;
 }
 
