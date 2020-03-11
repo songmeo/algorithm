@@ -23,21 +23,22 @@ Trie::Trie() {
 
 void Trie::insert(string s) {
 	Node* p = root;
-	for(auto it = s.begin(); it != s.end(); ++it) {
-		map<char, Node*> m = p->children;
-		if(!m.count(*it)) {
+	for(char c : s) {
+		auto m = p->children;
+		if(!m.count(c)) {
 			Node* n = new Node();
-			m.insert(pair<char, Node*>(*it,n));
+			m.insert(pair<char, Node*>(c,n));
 		}
-		else {
-			p = p->children[*it];
-		}
+		else
+			p = m[c];
 	}
+	p->completeWord = true;
 }
 
 int main() {
 	Trie* t = new Trie();
 	t->insert("abc");
+	t->insert("adf");
 	return 0;
 }
 
