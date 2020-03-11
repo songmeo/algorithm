@@ -32,9 +32,7 @@ void Trie::insert(string s) {
 			Node* n = new Node();
 			m.insert(pair<char, Node*>(c,n));
 		}
-		else {
-			p = m[c];
-		}
+		p = m[c];
 	}
 	p->completeWord = true;
 }
@@ -56,14 +54,15 @@ void Trie::printAll(Node* tmp) {
 
 bool Trie::prefixSearch(string s) {
 	Node* p = root;
-	for(char c : s) {
+	size_t i;
+	for(i = 0; i < s.length(); ++i) {
 		auto m = p->children;
-		if(m.count(c))
-			p = m[c];
+		if(m.count(s[i]))
+			p = m[s[i]];
 		else
 			return false;			
 	}
-	return true;
+	return i == s.length() - 1;
 }
 
 bool Trie::wordSearch(string s) {
@@ -84,7 +83,7 @@ int main() {
 	for(string s : arr) 
 		t->insert(s);
 	t->printAll();
-	cout << t->prefixSearch("ab");
+	cout << t->prefixSearch("edfg");
 	return 0;
 }
 
