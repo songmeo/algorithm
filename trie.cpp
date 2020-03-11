@@ -17,14 +17,17 @@ public:
 };
 
 Trie::Trie() {
+	root = new Node();
+	root->completeWord = false;
 }
 
 void Trie::insert(string s) {
 	Node* p = root;
 	for(auto it = s.begin(); it != s.end(); ++it) {
-		if(!p->children.count(*it)) {
+		map<char, Node*> m = p->children;
+		if(!m.count(*it)) {
 			Node* n = new Node();
-			root->children.insert(pair<char, Node*>(*it,n));
+			m.insert(pair<char, Node*>(*it,n));
 		}
 		else {
 			p = p->children[*it];
@@ -35,7 +38,6 @@ void Trie::insert(string s) {
 int main() {
 	Trie* t = new Trie();
 	t->insert("abc");
-	//t->insert("adf");
 	return 0;
 }
 
