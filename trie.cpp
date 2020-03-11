@@ -25,15 +25,16 @@ Trie::Trie() {
 }
 
 void Trie::insert(string s) {
-	Node* &p = root;
+	Node* p = root;
 	for(char c : s) {
-		auto m = p->children;
-		if(!m.count(c)) {
+		auto &m = p->children;
+		if(!(p->children).count(c)) {
 			Node* n = new Node();
 			m.insert(pair<char, Node*>(c,n));
 		}
-		else
+		else {
 			p = m[c];
+		}
 	}
 	p->completeWord = true;
 }
