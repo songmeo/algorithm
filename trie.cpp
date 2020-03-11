@@ -67,13 +67,16 @@ bool Trie::prefixSearch(string s) {
 
 bool Trie::wordSearch(string s) {
 	Node* p = root;
-	for(char c : s) {
+	size_t i;
+	for(i = 0; i < s.length(); ++i) {
 		auto m = p->children;
-		if(m.count(c))
-			p = m[c];
-		else
-			return false;
+		if(m.count(s[i]))
+			p = m[s[i]];
+		else {
+			return false;	
+		}		
 	}
+	
 	return p->completeWord;
 }
 
@@ -83,7 +86,7 @@ int main() {
 	for(string s : arr) 
 		t->insert(s);
 	t->printAll();
-	cout << t->prefixSearch("edfg");
+	cout << t->wordSearch("abcde");
 	return 0;
 }
 
