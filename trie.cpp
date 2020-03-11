@@ -10,11 +10,13 @@ struct Node {
 class Trie {
 private:
 	Node* root;
+	void printAll(Node* tmp);
 public:
 	Trie();
 	void insert(string s);
 	bool prefixSearch(string s); //if a prefix exists
 	bool wordSearch(string s); //if whole word exists
+	void printAll();
 };
 
 Trie::Trie() {
@@ -23,7 +25,7 @@ Trie::Trie() {
 }
 
 void Trie::insert(string s) {
-	Node* p = root;
+	Node* &p = root;
 	for(char c : s) {
 		auto m = p->children;
 		if(!m.count(c)) {
@@ -34,6 +36,21 @@ void Trie::insert(string s) {
 			p = m[c];
 	}
 	p->completeWord = true;
+}
+
+void Trie::printAll() {
+	printAll(root);
+}
+
+void Trie::printAll(Node* tmp) {
+	Node* t = tmp;
+	auto m = t->children;
+	if(!m.empty()){
+		for(auto p : m) {
+			cout << p.first << " ";
+			printAll(p.second);	
+		}
+	}
 }
 
 bool Trie::prefixSearch(string s) {
@@ -65,6 +82,7 @@ int main() {
 	string arr[] = {"abc", "abcd", "lmn", "edf"};
 	for(string s : arr) 
 		t->insert(s);
+	t->printAll();
 	cout << t->prefixSearch("ab");
 	return 0;
 }
