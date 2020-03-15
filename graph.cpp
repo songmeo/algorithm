@@ -8,13 +8,13 @@ using namespace std;
  * space O(n) (number of edges)
  * finding all adjacent vertexes: time O(n) (linear search through edge list)
  * finding if 2 vertexes are connected: time O(n) (linear search through edge list)
- * Costly because number of edges could be close to quadratic number of vertices
+ * Costly because number of edges could be close to quadratic number of vertices 
+   struct Edge {
+     int startV; 
+	 int endV;
+	 int weight;
+   };
 */
-struct Edge {
-	int startV; 
-	int endV;
-	int weight;
-};
 
 /*
  * Adjacency matrix
@@ -28,10 +28,17 @@ struct Edge {
  * space complexity O(e) (number of edges)
  * finding all adjacent vertexes: time O(n)
  * finding if 2 vertexes are connected: 
+ * Using a binary search tree will be even better for inserting, deleting and searching!
 */
-struct ajadencyList {
-	vector<int> *al;
-}
+struct Node {
+	int data;
+	int weight;
+	Node* next;
+};
+
+class adjacencyList {
+	vector<Node *> a;
+};
 
 int main() {
 }
