@@ -37,6 +37,11 @@ struct Node {
 };
 
 class adjacencyList {
+public:
+	adjacencyList(int V);
+	void addEdge(int src, int dest);
+private:
+	int numVertices;
 	vector<Node *> a;
 };
 
