@@ -3,7 +3,11 @@
 #include <list>
 using namespace std;
 
-//bfs on a binary tree is like level order, dfs is like preorder
+/*
+ * bfs on a binary tree is like level order, dfs is like preorder
+ * bfs uses queue and dfs uses stack
+ */
+
 class Graph {
 private:
 	int vertices;
@@ -12,6 +16,7 @@ public:
 	Graph(int i);
 	void addEdge(int v, int w);
 	void BFS(int s);
+	void DFS(int s);
 };
 
 Graph::Graph(int i) {
@@ -23,16 +28,16 @@ void Graph::addEdge(int v, int w) {
 	adj[v].push_back(w);
 }
 
-void Graph::BFS(int s) {
+void Graph::BFS(int s) { //s is starting vertice
 	bool visited[vertices] = { false }; // mark all vertices as not visited
-	queue<int> q; //a queue for bfs
+	queue<int> q; //a queue for exploration
 	visited[s] = true; //mark s as visited node
 	q.push(s); //enqueue s
 	list<int>::iterator i;
 	while(!q.empty()) {
 		s = q.front();
 		cout << s << " ";
-		q.pop();
+		q.pop(); //remove the first element
 		for(i = adj[s].begin(); i != adj[s].end(); ++i) {
 			if(!visited[*i]) {
 				visited[*i] = true;
@@ -40,6 +45,10 @@ void Graph::BFS(int s) {
 			}
 		}
 	}
+}
+
+void Graph::DFS(int s) {
+	
 }
 
 int main() {
