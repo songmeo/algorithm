@@ -7,15 +7,16 @@
 #include <algorithm>
 using namespace std;
 
+//O(n)
 class Solution {
 public:
 	vector<int> uniqueElement(vector<int> v) {
 		int j = 1;
-		for(int i = 0; i < (int) v.size() - 2; i++) {
+		for(int i = 0; i < (int) v.size() - 2; i++) { 
 			if(v[i] != v[i+1])
 				v[j++] = v[i+1];
 		}
-		v.erase(v.begin()+j, v.end());
+		v.erase(v.begin()+j, v.end()); //erase cost O(n)
 		return v;
 	}
 };
