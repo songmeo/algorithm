@@ -9,7 +9,7 @@ using namespace std;
 class Solution {
 public:
 	bool subsetsum(vector<int> &v, int k) {
-		int n = v.size() - 1;
+		int n = v.size();
 		for(int mask = 0; mask < (1 << n); mask++) {
 			int sum = 0;
 			for(int i = 0; i < n; i++) {
