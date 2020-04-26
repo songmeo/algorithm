@@ -5,27 +5,35 @@ using namespace std;
 /*
  * merge sort using divide and conquer
  */
-void merge(vector<int>& v, int l, int m, int h) {
-	vector<int> L, R;
-	int i, j, k;
-	int n1 = m - l + 1;
-	int n2 = h - m;
+void merge(vector<int>& v, vector<int>& left, vector<int>& right) {
+	int i = 0, l = 0, r = 0;
+	while(l < left.size() && r < right.size()) {
+		if(left[l] < right[r])
+			v[i++] = left[l++];
+		else
+			v[i++] = right[r++];
+	}
+	for(; l < (int) left.size(); l++) {
+		v[i++] = left[l];
+	}
+	for(; r < (int) right.size(); r++) {
+		v[i++] = right[r];
+	}
 }
 
-void mergesort(vector<int>& v, int l, int h) {
-	int l = 0, h = v.size() - 1;
+vector<int> mergesort(vector<int>& v, int l, int h) {
 	if(l < h) {
 		int mid = (l + h) / 2;
-		mergesort(v, l, mid);
-		mergesort(v, mid + 1, h);
-		merge(v, l, mid, h);
+		vector<int> left = mergesort(v, l, mid);
+		vector<int> right = mergesort(v, mid + 1, h);
+		merge(v, left, right);
 	}
+	return v;
 }
 
 int main() {
 	vector<int> v{1,2,6,3,9,8,7};
-	mergesort(v, l, h);
-	for(int i : v)
+	for(int i : mergesort(v, 0, v.size() - 1))
 		cout << i << " ";
 	return 0;
 }
