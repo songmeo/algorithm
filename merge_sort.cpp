@@ -5,35 +5,39 @@ using namespace std;
 /*
  * merge sort using divide and conquer
  */
-void merge(vector<int>& v, vector<int>& left, vector<int>& right) {
-	int i = 0, l = 0, r = 0;
+void merge(vector<int>& v, int lo, int mid, int hi) {
+	vector<int> left(v.begin() + lo, v.begin() + mid);
+	vector<int> right(v.begin() + mid + 1, v.begin() + hi);
+	int l = 0, r = 0, i = 0;
 	while(l < left.size() && r < right.size()) {
-		if(left[l] < right[r])
+		if(left[l] < right[r]) {
 			v[i++] = left[l++];
-		else
+		}
+		else {
 			v[i++] = right[r++];
+		}
 	}
-	for(; l < (int) left.size(); l++) {
+	for(; l < left.size(); l++) {
 		v[i++] = left[l];
 	}
-	for(; r < (int) right.size(); r++) {
+	for(; r < right.size(); r++) {
 		v[i++] = right[r];
 	}
 }
 
-vector<int> mergesort(vector<int>& v, int l, int h) {
+void mergesort(vector<int>& v, int l, int h) {
 	if(l < h) {
 		int mid = (l + h) / 2;
-		vector<int> left = mergesort(v, l, mid);
-		vector<int> right = mergesort(v, mid + 1, h);
-		merge(v, left, right);
+		mergesort(v, l, mid);
+		mergesort(v, mid + 1, h);
+		merge(v, l, mid, h);
 	}
-	return v;
 }
 
 int main() {
-	vector<int> v{1,2,6,3,9,8,7};
-	for(int i : mergesort(v, 0, v.size() - 1))
+	vector<int> v{1,2,6,3,9,8,7,10};
+	mergesort(v, 0, v.size() - 1);
+	for(int i : v)
 		cout << i << " ";
 	return 0;
 }
