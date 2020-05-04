@@ -1,17 +1,23 @@
 /*
  * using n-queen problem
+ * return number of solutions
  */
 #include <iostream>
 #include <vector>
 using namespace std;
 
 class pos {
-	int x, y;
-	pos(int x, int y) : x(x), y(y) {}
+public:
+	int r, c;
+	pos(int row, int col) { 
+		r = row ; 
+		c = col; 
+	}
 };
 
 class Solution {
 private:
+	int ans = 0;
 	int size;
 public:
 	Solution(int s) {
@@ -20,27 +26,34 @@ public:
 	
 	bool attacked(vector<pos> positions, pos p) {
 		for(pos i : positions) {
-			if(p.x == i.x || p.y == i.y || i.x + i.y == p.x + p.y || p.x - i.x == p.y - i.y) 
+			if(p.c == i.c || p.r == i.r || i.r + i.c == p.r + p.c || p.r - i.r == p.c - i.c) 
 				return true;
 		}
 		return false;
 	}
 	
-	int n_queen {
-		int ans = 0;
-		vector<pos> positions;
+	bool solve(vector<pos> positions, int c) {
 		//place a queen on each row
-		int r = 0, c = 0;
-		if(p.x == i.x || p.y == i.y || i.x + i.y == p.x + p.y || p.x - i.x == p.y - i.y) 
-				return true;
-		else
-			c++;
+		for(int r = 0; r < size; r++) {
+			pos* tmp = new pos(r,c);
+			if(!attacked(positions, *tmp)) {
+				if(solve(positions, c + 1)) {
+					ans++;
+					return true;
+				}
+			}
+		}
+		return false;
+	}
+	
+	int n_queen() {
+		vector<pos> positions;
 		return ans;
 	}
 };
 
 int main() {
 	Solution s(4);
-	cout << s.n_queen;
+	cout << s.n_queen();
 	return 0;
 }
