@@ -8,6 +8,7 @@
 #define N 8
 using namespace std;
 
+int ans = 0;
 void printSolution(int board[N][N]) {
 	for(int i = 0; i < N; i++) {
 		for(int j = 0; j < N; j++) {
@@ -37,31 +38,23 @@ bool isSafe(int board[N][N], int row, int col) {
 }
 
 //find a place for a queen on each row
-bool solveNQUtil(int board[N][N], int row) {
-	if(row >= N)
-		return true;
+void solveNQ(int board[N][N], int row) {
+	if(row == N) {
+		ans++;
+		printSolution(board);
+	}
 	for(int i = 0; i < N; i++) {
 		if(isSafe(board, row, i)) {
 			board[row][i] = 1;
-			if(solveNQUtil(board, row + 1))
-				return true;
+			solveNQ(board, row + 1);
 			board[row][i] = 0;
 		}
 	}
-	return false;
-}
-
-bool solveNQ() {
-	int board[N][N] = {0};
-	if(solveNQUtil(board,0) == false) {
-		cout << "no solution" << endl;
-		return false;
-	}
-	printSolution(board);
-	return true;
 }
 
 int main() {
-	solveNQ();
+	int board[N][N] = {0};
+	solveNQ(board,0);
+	cout << ans;
 	return 0;
 }
